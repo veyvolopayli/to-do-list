@@ -5,9 +5,11 @@ app = Flask(__name__)
 # Хранилище задач (в памяти)
 tasks = []
 
+
 @app.route('/')
 def index():
     return "Hello from docker!"
+
 
 @app.route('/tasks', methods=['GET', 'POST'])
 def handle_tasks():
@@ -24,6 +26,7 @@ def handle_tasks():
         return jsonify(task), 201
 
     return jsonify(tasks)
+
 
 @app.route('/tasks/<int:task_id>', methods=['GET', 'PUT', 'DELETE'])
 def handle_single_task(task_id):
@@ -45,10 +48,15 @@ def handle_single_task(task_id):
 
     return None
 
+
 @app.route('/version')
 def version():
+    """
+    Возвращает текущую версию API.
+    Формат ответа: JSON {'version': 'x.x.x'}
+    """
     return jsonify({"version": "1.1.0"})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
-
