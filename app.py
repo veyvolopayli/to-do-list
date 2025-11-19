@@ -45,6 +45,10 @@ def handle_single_task(task_id):
 
     return None
 
+@app.route('/version')
+def version():
+    return jsonify({"version": "1.0.0"})
+
 if __name__ == '__main__':
     app.run(debug=True)
 
