@@ -1,0 +1,22 @@
+name: Enable Auto Merge for Development
+
+on:
+  pull_request:
+    branches: [ "development" ] # Срабатывает ТОЛЬКО для ветки development
+
+jobs:
+  enable-auto-merge:
+    runs-on: ubuntu-latest
+
+    # Права доступа, необходимые боту для слияния
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Enable Auto-Merge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Команда говорит: включи авто-мерж (--auto) методом слияния (--merge) для текущего PR
+          gh pr merge --auto --merge "${{ github.event.pull_request.html_url }}"
