@@ -1,0 +1,18 @@
+name: Enable Auto Merge (Universal)
+
+on:
+  pull_request:
+    branches: [ "development", "master" ]
+
+jobs:
+  enable-auto-merge:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Enable Auto-Merge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr merge --auto --merge "${{ github.event.pull_request.html_url }}"
