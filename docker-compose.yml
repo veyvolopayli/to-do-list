@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app  # ЭТО И ЕСТЬ ВОТЧЕР: пробрасываем текущую папку внутрь контейнера
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_DEBUG=1 # Включает режим отладки и автоперезагрузку
